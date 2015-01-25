@@ -1,0 +1,146 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 11.5 
+tiers? <exists> 
+size = 1 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "syllable" 
+        xmin = 0 
+        xmax = 11.5 
+        intervals: size = 33 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.9098033126293996 
+            text = "" 
+        intervals [2]:
+            xmin = 0.9098033126293996 
+            xmax = 1.3079054810832478 
+            text = "clar" 
+        intervals [3]:
+            xmin = 1.3079054810832478 
+            xmax = 1.435189701897019 
+            text = "i" 
+        intervals [4]:
+            xmin = 1.435189701897019 
+            xmax = 1.6569750795941272 
+            text = "ty" 
+        intervals [5]:
+            xmin = 1.6569750795941272 
+            xmax = 2.4582559400571817 
+            text = "" 
+        intervals [6]:
+            xmin = 2.4582559400571817 
+            xmax = 2.5692600151171576 
+            text = "in" 
+        intervals [7]:
+            xmin = 2.5692600151171576 
+            xmax = 2.641933010492332 
+            text = "the" 
+        intervals [8]:
+            xmin = 2.641933010492332 
+            xmax = 3.0171728215095563 
+            text = "sense" 
+        intervals [9]:
+            xmin = 3.0171728215095563 
+            xmax = 3.148728662040025 
+            text = "of" 
+        intervals [10]:
+            xmin = 3.148728662040025 
+            xmax = 3.362924368400559 
+            text = "trans" 
+        intervals [11]:
+            xmin = 3.362924368400559 
+            xmax = 3.789162459682702 
+            text = "par" 
+        intervals [12]:
+            xmin = 3.789162459682702 
+            xmax = 4.533974781831924 
+            text = "ence" 
+        intervals [13]:
+            xmin = 4.533974781831924 
+            xmax = 5.211187411901697 
+            text = "" 
+        intervals [14]:
+            xmin = 5.211187411901697 
+            xmax = 5.3403836653709105 
+            text = "I" 
+        intervals [15]:
+            xmin = 5.3403836653709105 
+            xmax = 5.519744897959184 
+            text = "don't" 
+        intervals [16]:
+            xmin = 5.519744897959184 
+            xmax = 5.685298492020382 
+            text = "mean" 
+        intervals [17]:
+            xmin = 5.685298492020382 
+            xmax = 5.828100660554076 
+            text = "that" 
+        intervals [18]:
+            xmin = 5.828100660554076 
+            xmax = 6.110168988230212 
+            text = "much" 
+        intervals [19]:
+            xmin = 6.110168988230212 
+            xmax = 6.309908199839075 
+            text = "can" 
+        intervals [20]:
+            xmin = 6.309908199839075 
+            xmax = 6.427646354316375 
+            text = "be" 
+        intervals [21]:
+            xmin = 6.427646354316375 
+            xmax = 6.638281773026671 
+            text = "ex" 
+        intervals [22]:
+            xmin = 6.638281773026671 
+            xmax = 7.4940445665445665 
+            text = "plained" 
+        intervals [23]:
+            xmin = 7.4940445665445665 
+            xmax = 8.186399790685506 
+            text = "" 
+        intervals [24]:
+            xmin = 8.186399790685506 
+            xmax = 8.522900264393448 
+            text = "clar" 
+        intervals [25]:
+            xmin = 8.522900264393448 
+            xmax = 8.592332936248352 
+            text = "i" 
+        intervals [26]:
+            xmin = 8.592332936248352 
+            xmax = 8.679162414965987 
+            text = "ty" 
+        intervals [27]:
+            xmin = 8.679162414965987 
+            xmax = 8.755350784881172 
+            text = "in" 
+        intervals [28]:
+            xmin = 8.755350784881172 
+            xmax = 8.841686233633238 
+            text = "the" 
+        intervals [29]:
+            xmin = 8.841686233633238 
+            xmax = 9.250565838738597 
+            text = "sense" 
+        intervals [30]:
+            xmin = 9.250565838738597 
+            xmax = 9.34215211206264 
+            text = "of" 
+        intervals [31]:
+            xmin = 9.34215211206264 
+            xmax = 9.70988274512084 
+            text = "si" 
+        intervals [32]:
+            xmin = 9.70988274512084 
+            xmax = 10.588893011750153 
+            text = "lence" 
+        intervals [33]:
+            xmin = 10.588893011750153 
+            xmax = 11.5 
+            text = "" 

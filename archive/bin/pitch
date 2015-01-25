@@ -1,0 +1,87 @@
+#!/usr/bin/env ruby
+
+require 'praat'
+require 'json'
+require 'mm/lilypond'
+
+# First argument is the filename of pitches to parse
+pitches = JSON.parse(File.read(ARGV[0]), :symbolize_names => true)
+# Second argument is the output filename
+output_filename = ARGV[1]
+start = ARGV[2].to_i
+finish = ARGV[3].to_i
+
+def available_pitches step, rd, max_prime = nil
+  if max_prime
+    rd = rd.select do |ratio|
+      ratio[:prime_limit] <= max_prime
+    end
+  end
+
+  min_harmonicity = Math.sin(step * Math::PI/30)
+
+  if min_harmonicity == 0
+    rd.select {|ratio| ratio[:ratio] == [1, 1]}
+  elsif min_harmonicity < 0
+    r = Range.new(-1.0, -1.0 - min_harmonicity)
+    rd.select {|ratio| r.include? ratio[:harmonicity]}
+  else
+    r = Range.new(1.0 - min_harmonicity, 1.0)
+    rd.select {|ratio| r.include? ratio[:harmonicity]}
+  end
+end
+
+def quantize pitch, values
+  if pitch[:pitch].nil?
+    nil
+  else
+    values.min_by {|q| (pitch[:pitch] - q[:pitch_height]).abs}
+  end
+end
+
+# Read in the tuneable interval data
+tuneable_intervals = JSON.parse(File.read("json/tuneable_by_ear.json"), :symbolize_names => true)
+
+# Add the inversions
+tuneable_intervals.dup.each do |rd|
+  tuneable_intervals << {
+    :ratio => [rd[:ratio][1], rd[:ratio][0]],
+    :harmonicity => rd[:harmonicity] * -1.0,
+    :pitch_height => rd[:pitch_height] * -1.0
+  }
+end
+
+# Add the prime limit to the intervals
+tuneable_intervals.each do |ratio|
+  ratio[:prime_limit] = ratio[:ratio].max_by do |num|
+    a = num.prime_division.map(&:first).max
+    a.nil? ? 0 : a
+  end
+
+  unless ratio[:prime_limit] == 1
+    ratio[:prime_limit] = ratio[:prime_limit].prime_division.last.first
+  end
+end
+
+pitch_repeats = (start..finish).map do |i|
+  a = available_pitches(i, Marshal.load(Marshal.dump(tuneable_intervals)), 11)
+  pitches.map do |p|
+    quantize p, a
+  end
+end
+
+ly = MM::Lilypond.new
+ly.offset = 0
+
+pitch_repeats.each do |pr|
+  pr.each do |pitch|
+    unless pitch.nil?
+      pitch[:lily_note] = ly.get_pitch(MM::Ratio.new(*pitch[:ratio]))
+    end
+  end
+end
+
+File.open output_filename, "w" do |f|
+  f.puts pitch_repeats.to_json
+end
+
