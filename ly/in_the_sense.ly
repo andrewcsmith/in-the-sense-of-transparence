@@ -28,6 +28,7 @@ words_second_half = \lyricmode {
   clar -- i -- ty in the sense of si -- lence
 }
 
+
 \paper {
   #(set-paper-size "letter" 'landscape)
 
@@ -55,8 +56,6 @@ words_second_half = \lyricmode {
     (stretchability . 12)
     (padding . 1))
 
-  max-systems-per-page = #5
-
   #(define fonts
     (set-global-fonts
       #:music "emmentaler-he"
@@ -65,7 +64,7 @@ words_second_half = \lyricmode {
       #:factor (/ staff-height pt 20)))
 }
 
-\markup \column { % Performance notes
+\markup \column {
   \vspace #4
   \line { \large \sans {Performance notes} }
   \line { \musicglyph #"noteheads.s2cross" = mute string with flats of fingers }
@@ -83,7 +82,7 @@ words_second_half = \lyricmode {
   \line \sans { Helmholtz-Ellis accidentals, by Marc Sabat and Wolfgang Von Schweinitz }
 }
 
-\score { % Tuning key
+\score {
   \new Staff {
     \clef bass
     \time 8/4
@@ -97,7 +96,7 @@ words_second_half = \lyricmode {
     fsharpDfUs_\markup {\sans "+17.5"}^\markup \sans {\small 10/7} \break |
     gflatUfDs_\markup {\sans "-17.5"}^\markup \sans {\small 7/5}
     gUsUe_\markup {\sans "+82.5"}^\markup \sans {\small 11/7}
-    aflatDs_\markup {\sans "-31.2"}^\markup \sans {\small 5}
+    aflatDs_\markup {\sans "-31.2"}^\markup \sans {\small 8/5}
     aflatUf_\markup {\sans "+13.7"}^\markup \sans {\small 8/5}
     aDf_\markup {\sans "-15.6"}^\markup \sans {\small 5/3}
     aUs_\markup {\sans "+33.1"}^\markup \sans {\small 12/7}
@@ -127,23 +126,8 @@ words_second_half = \lyricmode {
 
 \pageBreak
 
-\score { 
+\score {
   <<
-  \new Staff \with {
-    \remove "Ledger_line_engraver"
-    \remove "Clef_engraver"
-    instrumentName = \markup \concat \vcenter {"Bow pos." \hspace #1 \smaller \column {"pont." "tasto"}}
-  } {
-    \clef percussion
-    \override Staff.StaffSymbol.line-positions = #'(-4 0 4)
-    \override BendAfter.stencil = #straight-bend::print
-    \override NoteHead.transparent = ##t
-
-    \formant_first_half
-    \formant_second_half
-    \bar "|." |
-    
-  }
   \new Staff \with {
     instrumentName = "Pitch"
   } {
@@ -163,6 +147,21 @@ words_second_half = \lyricmode {
     \override LyricText.font-shape = #'italic
     \repeat unfold 31 {\words_first_half}
     \repeat unfold 31 {\words_second_half}
+  }
+  \new Staff \with {
+    \remove "Ledger_line_engraver"
+    \remove "Clef_engraver"
+    instrumentName = \markup \concat \vcenter {"Bow pos." \hspace #1 \smaller \column {"pont." "tasto"}}
+  } {
+    \clef percussion
+    \override Staff.StaffSymbol.line-positions = #'(-4 0 4)
+    \override BendAfter.stencil = #straight-bend::print
+    \override NoteHead.transparent = ##t
+
+    \formant_first_half
+    \formant_second_half
+    \bar "|." |
+    
   }
   >>
   

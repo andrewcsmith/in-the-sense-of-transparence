@@ -35,11 +35,11 @@ end
       note = "s"
     else
       n = repeat.shift
-      note = n[:lily_offset][0]
+      note = n[:lily_offset][1]
     end
     note = note + "4*" + dur[:duration_string]
     unless dur[:rest]
-      note = "#{note} \\bendAfter ##{n[:destination]}"
+      note = "#{note} \\bendAfter ##{n[:destination][1]}"
     end
     note
   end << "s8 |"

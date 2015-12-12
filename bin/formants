@@ -8,12 +8,14 @@ require 'json'
 vowelgrid_filename = ARGV[0]
 formant_filename = ARGV[1]
 output_filename = ARGV[2]
+range = ARGV[3]
 
 begin
   vowelgrid = Praat.parse_file vowelgrid_filename
   formants = Praat.parse_file formant_filename
 
   vowels = vowelgrid.items[0].intervalss.select(&:has_text?)
+  range = Range.new(*(/(\d+)..(\d+)/.match(range)[1..2].map(&:to_i)))
 
   # Create an Array with each formant segment
   vowel_formants = vowels.map {|vowel|
@@ -48,10 +50,10 @@ begin
   scaled_offsets = (formant_offsets - offset_mins) / offset_ranges
   scaled_slopes = (formant_slopes - slope_mins) / slope_ranges
 
-  notenames = ["f", "g", "a", "b", "c'", "d'", "e'", "f'", "g'"] 
+  notenames = ["f", "g", "a", "b", "c'", "d'", "e'", "f'", "g'"].reverse
   quantizer = ->(offset) { (offset * 8).round } 
 
-  formant_repeats = (30..60).map do |i|
+  formant_repeats = range.map do |i|
     slopes = scaled_slopes.dup * Math.cos((Math::PI / 30.0) * i)
     offsets = scaled_offsets.dup
 
@@ -60,7 +62,7 @@ begin
       quant_slope = slope.map {|r| r.round(1)}
       lily_offset = quant_offset.map {|r| notenames[r]}
       num_frames = lines[0]
-      destination = (quant_slope[0] * num_frames * 3.0 / 70.0).round(1).to_s
+      destination = quant_slope.map {|qs| (qs * num_frames * -3.0 / 70.0).round(1).to_s}
 
       # Each element is a hash:
       {
